@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="sw" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Results Products | Asili. Ubora. Matokeo.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0E3B23;
+    --forest-deep:#092A19;
+    --leaf:#2E7D46;
+    --leaf-light:#5AAE6E;
+    --gold:#B8862E;
+    --gold-light:#D9A94A;
+    --cream:#F7F3E8;
+    --cream-2:#EFE9D8;
+    --ink:#1B1B16;
+    --white:#FFFFFF;
+    --line: rgba(14,59,35,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:700; letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .container{max-width:1180px; margin:0 auto; padding:0 28px;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
+
+  .vein{ width:100%; height:46px; display:block; }
+  .vein-flip{ transform:scaleY(-1); }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(247,243,232,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    max-width:1180px; margin:0 auto;
+    gap:18px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:44px; width:auto;}
+  nav ul{list-style:none; display:flex; gap:30px;}
+  nav a{
+    font-size:14.5px; font-weight:600; color:var(--forest);
+    position:relative; padding:4px 0;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+    background:var(--gold); transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .right-cluster{ display:flex; align-items:center; gap:14px; }
+  .lang-switch{
+    display:flex; align-items:center; background:var(--cream-2);
+    border:1px solid var(--line); border-radius:30px; padding:3px;
+  }
+  .lang-switch button{
+    border:none; background:transparent; padding:6px 13px; font-size:12.5px;
+    font-weight:800; font-family:'IBM Plex Mono',monospace; letter-spacing:.03em;
+    color:var(--forest); border-radius:24px; cursor:pointer; transition:all .2s ease;
+  }
+  .lang-switch button.active{ background:var(--forest); color:var(--white); }
+  .nav-cta{
+    background:var(--forest); color:var(--white); padding:10px 20px;
+    border-radius:30px; font-size:14px; font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .nav-cta:hover{background:var(--forest-deep);}
+  .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .burger span{display:block; width:24px; height:2px; background:var(--forest); margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; padding:64px 0 40px; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center; }
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--cream-2); border:1px solid var(--line);
+    padding:7px 14px; border-radius:30px; margin-bottom:22px;
+  }
+  .hero-tag span{font-size:12px; font-weight:600; color:var(--forest); font-family:'IBM Plex Mono',monospace; letter-spacing:.04em;}
+  .hero h1{ font-size:clamp(38px, 5.4vw, 64px); line-height:1.03; color:var(--forest); margin-bottom:22px; }
+  .hero h1 em{ font-style:normal; color:var(--gold); }
+  .hero p.lead{ font-size:18px; color:#3c4a3f; max-width:480px; margin-bottom:34px; }
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{ padding:15px 28px; border-radius:32px; font-weight:700; font-size:15px;
+    display:inline-flex; align-items:center; gap:9px; transition:transform .2s ease, box-shadow .2s ease; }
+  .btn-primary{background:var(--gold); color:var(--forest-deep);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(184,134,46,0.35);}
+  .btn-outline{border:1.5px solid var(--forest); color:var(--forest);}
+  .btn-outline:hover{background:var(--forest); color:var(--white); transform:translateY(-2px);}
+
+  .hero-art{ position:relative; display:flex; align-items:center; justify-content:center; }
+  .hero-art .stack{ position:relative; width:100%; max-width:380px; }
+  .hero-art .stack::before{
+    content:''; position:absolute; inset:-30px;
+    background: radial-gradient(circle at 60% 30%, rgba(90,174,110,0.28), transparent 60%);
+    z-index:0; border-radius:50%;
+  }
+  .hero-art img.main-jar{
+    position:relative; z-index:2; border-radius:18px;
+    box-shadow:0 30px 60px rgba(9,42,25,0.28); transform:rotate(-2deg);
+  }
+  .hero-art img.side-jar{
+    position:absolute; z-index:1; width:44%; bottom:-26px; left:-14px;
+    border-radius:14px; box-shadow:0 20px 40px rgba(9,42,25,0.22); transform:rotate(6deg);
+  }
+  .float-leaf{ position:absolute; z-index:3; font-size:34px; animation: sway 5s ease-in-out infinite; }
+  .float-leaf.l1{ top:8%; right:2%; }
+  .float-leaf.l2{ bottom:10%; right:14%; animation-delay:1.4s; font-size:24px;}
+  @keyframes sway{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-14px) rotate(8deg); }
+  }
+  @media (prefers-reduced-motion: reduce){ .float-leaf{animation:none;} html{scroll-behavior:auto;} }
+
+  .trust-row{ margin-top:56px; padding-top:28px; border-top:1px solid var(--line); display:flex; gap:40px; flex-wrap:wrap; }
+  .trust-item{display:flex; align-items:center; gap:10px;}
+  .trust-item .num{font-family:'Fraunces',serif; font-size:26px; font-weight:700; color:var(--forest);}
+  .trust-item .label{font-size:13px; color:#556355;}
+
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head .eyebrow{margin-bottom:12px; display:block;}
+  .section-head h2{font-size:clamp(30px,3.6vw,44px); color:var(--forest); margin-bottom:14px;}
+  .section-head p{color:#4a564b; font-size:16.5px;}
+
+  .band-dark{ background:var(--forest); color:var(--cream); }
+  .band-dark .section-head h2{ color:var(--white); }
+  .band-dark .section-head p{ color:rgba(247,243,232,0.75); }
+  .band-dark .eyebrow{ color:var(--gold-light); }
+
+  .why-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
+  .why-card{ background:var(--white); border:1px solid var(--line); border-radius:16px; padding:26px 20px; text-align:left;
+    transition:transform .25s ease, box-shadow .25s ease; }
+  .why-card:hover{transform:translateY(-6px); box-shadow:0 18px 34px rgba(14,59,35,0.10);}
+  .why-card .ic{font-size:28px; margin-bottom:14px; display:block;}
+  .why-card h3{font-size:16px; color:var(--forest); margin-bottom:8px; font-family:'Manrope',sans-serif; font-weight:800;}
+  .why-card p{font-size:13.5px; color:#5c6a5d;}
+
+  .about-wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center; }
+  .about-photo{ border-radius:20px; overflow:hidden; box-shadow:0 26px 50px rgba(14,59,35,0.16); position:relative; }
+  .about-photo img{width:100%;}
+  .about-copy h2{font-size:clamp(28px,3.4vw,38px); color:var(--forest); margin-bottom:18px;}
+  .about-copy p{color:#43503f; margin-bottom:16px; font-size:16px;}
+  .about-copy .sign{ font-family:'Fraunces',serif; font-style:italic; color:var(--gold); font-size:20px; margin-top:8px; }
+
+  .products{ background:var(--white); }
+  .prod-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .prod-card{ background:var(--cream); border-radius:20px; overflow:hidden; border:1px solid var(--line);
+    display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease; }
+  .prod-card:hover{ transform:translateY(-8px); box-shadow:0 24px 46px rgba(14,59,35,0.14); }
+  .prod-img{ aspect-ratio: 4/3.4; overflow:hidden; }
+  .prod-img img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .prod-card:hover .prod-img img{transform:scale(1.06);}
+  .prod-body{ padding:22px 22px 24px; display:flex; flex-direction:column; flex:1; }
+  .prod-weight{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--gold); letter-spacing:.05em;
+    margin-bottom:8px; text-transform:uppercase; }
+  .prod-card h3{font-size:20px; color:var(--forest); margin-bottom:10px; line-height:1.2;}
+  .prod-card p{font-size:14px; color:#556355; margin-bottom:20px; flex:1;}
+  .prod-cta{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:14px;
+    color:var(--forest); border-top:1px solid var(--line); padding-top:14px; }
+  .prod-cta span.arrow{transition:transform .2s ease;}
+  .prod-cta:hover span.arrow{transform:translateX(4px);}
+
+  .benefit-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+  .benefit-item{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:16px; padding:26px 18px; text-align:center; }
+  .benefit-item .ic{font-size:30px; margin-bottom:12px;}
+  .benefit-item h4{font-family:'Manrope',sans-serif; font-weight:800; font-size:14.5px; color:var(--white); margin-bottom:6px;}
+  .benefit-item p{font-size:12.5px; color:rgba(247,243,232,0.68);}
+
+  .quote-strip{ text-align:center; max-width:760px; margin:0 auto; }
+  .quote-strip .mark{font-family:'Fraunces',serif; font-size:60px; color:var(--gold); line-height:0.4; display:block; margin-bottom:18px;}
+  .quote-strip p{font-family:'Fraunces',serif; font-size:24px; font-style:italic; color:var(--forest); line-height:1.5;}
+  .quote-strip .who{margin-top:18px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--gold); letter-spacing:.04em;}
+
+  .contact-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:24px; overflow:hidden; box-shadow:0 30px 60px rgba(14,59,35,0.14); }
+  .contact-info{ background:var(--forest); color:var(--cream); padding:52px 44px; }
+  .contact-info h2{color:var(--white); font-size:30px; margin-bottom:16px;}
+  .contact-info > p{color:rgba(247,243,232,0.72); margin-bottom:32px; font-size:15px;}
+  .c-row{ display:flex; align-items:flex-start; gap:14px; margin-bottom:22px; }
+  .c-row .ic{ width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .c-row div .k{font-size:12px; color:var(--gold-light); font-family:'IBM Plex Mono',monospace; letter-spacing:.04em; margin-bottom:3px;}
+  .c-row div .v{font-size:15.5px; font-weight:600;}
+  .c-row a.v:hover{color:var(--gold-light);}
+  .contact-form{ background:var(--white); padding:52px 44px; }
+  .contact-form h3{color:var(--forest); font-size:22px; margin-bottom:22px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--forest); margin-bottom:7px; text-transform:uppercase; letter-spacing:.04em;}
+  .field input, .field textarea{ width:100%; border:1.5px solid var(--line); border-radius:10px; padding:12px 14px;
+    font-family:'Manrope',sans-serif; font-size:14.5px; background:var(--cream); color:var(--ink); }
+  .field input:focus, .field textarea:focus{ border-color:var(--gold); outline:none; }
+  .field textarea{resize:vertical; min-height:90px;}
+  .submit-btn{ width:100%; background:var(--forest); color:var(--white); border:none;
+    padding:15px; border-radius:10px; font-weight:700; font-size:15px; cursor:pointer; transition:background .2s ease; }
+  .submit-btn:hover{background:var(--forest-deep);}
+
+  footer{ background:var(--forest-deep); color:rgba(247,243,232,0.65); padding:36px 0; text-align:center; font-size:13.5px; }
+  footer .fbrand{ font-family:'Fraunces',serif; color:var(--white); font-size:18px; margin-bottom:8px; font-weight:700; }
+
+  /* ---------- Floating buttons ---------- */
+  .wa-float{
+    position:fixed; bottom:24px; right:24px; z-index:200;
+    background:#1EA952; color:#fff; width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:26px;
+    box-shadow:0 12px 26px rgba(0,0,0,0.28); transition:transform .2s ease; border:none; cursor:pointer;
+  }
+  .wa-float:hover{ transform:scale(1.08); }
+  .faq-float{
+    position:fixed; bottom:94px; right:24px; z-index:200;
+    background:var(--gold); color:var(--forest-deep); width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800;
+    box-shadow:0 12px 26px rgba(0,0,0,0.24); transition:transform .2s ease; border:none; cursor:pointer;
+  }
+  .faq-float:hover{ transform:scale(1.08); }
+
+  /* ---------- FAQ chat panel ---------- */
+  .faq-panel{
+    position:fixed; bottom:24px; right:24px; z-index:250;
+    width:340px; max-width:calc(100vw - 32px); height:460px; max-height:calc(100vh - 48px);
+    background:var(--white); border-radius:20px; overflow:hidden;
+    box-shadow:0 30px 60px rgba(9,42,25,0.32);
+    display:flex; flex-direction:column;
+    transform:translateY(20px) scale(0.96); opacity:0; pointer-events:none;
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .faq-panel.open{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+  .faq-head{ background:var(--forest); color:var(--white); padding:18px 20px; display:flex; align-items:center; justify-content:space-between; }
+  .faq-head .t{ font-family:'Fraunces',serif; font-size:17px; font-weight:700; }
+  .faq-head .s{ font-size:11.5px; color:rgba(247,243,232,0.7); margin-top:2px; }
+  .faq-close{ background:rgba(255,255,255,0.12); border:none; color:var(--white); width:28px; height:28px;
+    border-radius:50%; cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; }
+  .faq-body{ flex:1; overflow-y:auto; padding:16px; background:var(--cream); display:flex; flex-direction:column; gap:10px; }
+  .msg{ max-width:82%; padding:10px 13px; border-radius:14px; font-size:13.5px; line-height:1.5; }
+  .msg.bot{ background:var(--white); border:1px solid var(--line); color:var(--ink); align-self:flex-start; border-bottom-left-radius:4px; }
+  .msg.user{ background:var(--forest); color:var(--white); align-self:flex-end; border-bottom-right-radius:4px; }
+  .faq-chips{ display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px; background:var(--cream); }
+  .chip{ background:var(--white); border:1px solid var(--line); color:var(--forest); font-size:11.5px; font-weight:600;
+    padding:6px 11px; border-radius:20px; cursor:pointer; transition:all .2s ease; }
+  .chip:hover{ background:var(--forest); color:var(--white); border-color:var(--forest); }
+  .faq-input-row{ display:flex; gap:8px; padding:12px; border-top:1px solid var(--line); background:var(--white); }
+  .faq-input-row input{ flex:1; border:1.5px solid var(--line); border-radius:24px; padding:10px 15px; font-size:13.5px; font-family:'Manrope',sans-serif; background:var(--cream); }
+  .faq-input-row input:focus{ outline:none; border-color:var(--gold); }
+  .faq-send{ background:var(--gold); color:var(--forest-deep); border:none; width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; flex-shrink:0; }
+
+  @media (max-width: 900px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero-art{order:-1;}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .benefit-grid{grid-template-columns:repeat(2,1fr);}
+    .about-wrap{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-wrap{grid-template-columns:1fr;}
+    nav ul{display:none;}
+    .burger{display:block;}
+  }
+  @media (max-width: 560px){
+    .why-grid{grid-template-columns:1fr;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:1fr;}
+    .trust-row{gap:24px;}
+    section{padding:64px 0;}
+    .nav-cta span.txt{display:none;}
+    .faq-panel{ right:16px; bottom:16px; width:calc(100vw - 32px); }
+    .faq-float{ right:16px; bottom:86px; }
+    .wa-float{ right:16px; bottom:16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="nav-wrap">
+    <a href="#top" class="brand">
+      <img src="images/logo.png" alt="Quick Results Products logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#about" id="navAbout">Kuhusu Sisi</a></li>
+        <li><a href="#products" id="navProducts">Bidhaa</a></li>
+        <li><a href="#benefits" id="navBenefits">Faida</a></li>
+        <li><a href="#contact" id="navContact">Wasiliana</a></li>
+      </ul>
+    </nav>
+    <div class="right-cluster">
+      <div class="lang-switch" role="group" aria-label="Language / Lugha">
+        <button type="button" id="langSwBtn" class="active" onclick="setLang('sw')">SW</button>
+        <button type="button" id="langEnBtn" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="nav-cta" href="https://wa.me/255782479748" target="_blank" rel="noopener">
+        <span aria-hidden="true">💬</span><span class="txt" id="navCtaText">Agiza WhatsApp</span>
+      </a>
+      <button class="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag"><span id="heroTag">🌿 ASILI • UBORA • MATOKEO</span></div>
+        <h1 id="heroTitle">Bidhaa za asili kwa <em>afya bora</em> ya kila siku.</h1>
+        <p class="lead" id="heroLead">Quick Results Products ni chapa ya Kitanzania inayotengeneza unga wa asili, viungo na virutubisho kutoka kwenye mimea safi — kwa afya na maisha bora.</p>
+        <div class="btn-row">
+          <a href="#products" class="btn btn-primary" id="btnPrimary">Angalia Bidhaa →</a>
+          <a href="https://wa.me/255782479748" target="_blank" rel="noopener" class="btn btn-outline" id="btnOutline">Agiza kupitia WhatsApp</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><div class="num">100%</div><div class="label" id="trust1">Malighafi Asili</div></div>
+          <div class="trust-item"><div class="num">🇹🇿</div><div class="label" id="trust2">Bidhaa za Tanzania</div></div>
+          <div class="trust-item"><div class="num">6+</div><div class="label" id="trust3">Aina za Bidhaa</div></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="stack">
+          <img class="main-jar" src="images/turmeric.jpg" alt="Turmeric, Avocado & Moringa Powder">
+          <img class="side-jar" src="images/moringa.jpg" alt="Moringa Leaves Powder">
+          <span class="float-leaf l1">🍃</span>
+          <span class="float-leaf l2">🍃</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="vein" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,20 C300,60 900,-20 1200,20 L1200,46 L0,46 Z" fill="#0E3B23"></path></svg>
+
+<!-- Why Choose Us -->
+<section id="about" style="background:var(--forest); padding-top:56px;">
+  <div class="container">
+    <div class="section-head band-dark">
+      <span class="eyebrow" id="whyEyebrow">Kwa Nini Utuchague</span>
+      <h2 id="whyTitle">Ubora unaoonekana, matokeo unayoyahisi.</h2>
+      <p id="whyDesc">Kila bidhaa inatengenezwa kwa uangalifu, kuanzia uchaguzi wa malighafi hadi ufungashaji, ili kuhakikisha unapata thamani halisi ya fedha yako.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="ic">🌿</span>
+        <h3 id="why1t">100% Asili</h3>
+        <p id="why1d">Hakuna kemikali za ziada — unga na viungo halisi kutoka kwenye mimea.</p>
+      </div>
+      <div class="why-card">
+        <span class="ic">✅</span>
+        <h3 id="why2t">Ubora wa Hali ya Juu</h3>
+        <p id="why2d">Bidhaa zinachujwa na kufungashwa kwa viwango vya usafi na ubora.</p>
+      </div>
+      <div class="why-card">
+        <span class="ic">🇹🇿</span>
+        <h3 id="why3t">Kwa Fahari, Tanzania</h3>
+        <p id="why3d">Tunatengeneza na kuchakata bidhaa zetu hapa hapa Tanzania.</p>
+      </div>
+      <div class="why-card">
+        <span class="ic">📦</span>
+        <h3 id="why4t">Ufungashaji Bora</h3>
+        <p id="why4d">Chupa imara zenye lebo wazi na taarifa kamili za matumizi.</p>
+      </div>
+      <div class="why-card">
+        <span class="ic">📞</span>
+        <h3 id="why5t">Uagizaji Rahisi</h3>
+        <p id="why5d">Tuma ujumbe WhatsApp na bidhaa yako itafika popote ulipo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="vein vein-flip" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,20 C300,60 900,-20 1200,20 L1200,46 L0,46 Z" fill="#0E3B23"></path></svg>
+
+<!-- About -->
+<section>
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-photo">
+        <img src="images/products-group-v2.jpg" alt="Mkusanyiko wa bidhaa za Quick Results Products">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow" id="aboutEyebrow">Hadithi Yetu</span>
+        <h2 style="margin-top:12px;" id="aboutTitle">Tunaunganisha asili na mahitaji ya afya ya leo.</h2>
+        <p id="aboutP1">Quick Results Products ni chapa ya Kitanzania inayolenga kuwapatia wateja bidhaa bora za asili — unga wa mbegu za parachichi, majani ya moringa, mdalasini, na mchanganyiko wa manjano (turmeric) na moringa.</p>
+        <p id="aboutP2">Kila bidhaa imeandaliwa kwa lengo moja: kukuletea matokeo ya haraka na ya kudumu kiafya, huku tukienzi malighafi za asili tuliyonayo hapa nchini.</p>
+        <p class="sign" id="aboutSign">— Timu ya Quick Results Products</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Real Photos -->
+<section style="background:var(--cream-2); padding-top:64px; padding-bottom:64px;">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:36px;">
+      <span class="eyebrow" id="realEyebrow">Picha Halisi</span>
+      <h2 style="font-size:clamp(26px,3vw,36px);" id="realTitle">Bidhaa zetu, moja kwa moja kutoka ofisini kwetu.</h2>
+      <p id="realDesc">Hizi ni picha halisi za bidhaa zetu — si mfano tu, ndivyo zinavyofika mikononi mwa wateja.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;">
+      <div style="background:var(--white); border-radius:20px; overflow:hidden; border:1px solid var(--line); box-shadow:0 18px 34px rgba(14,59,35,0.08);">
+        <img src="images/turmeric-real.jpg" alt="Turmeric, Avocado & Moringa Powder - picha halisi" style="width:100%; display:block;">
+      </div>
+      <div style="background:var(--white); border-radius:20px; overflow:hidden; border:1px solid var(--line); box-shadow:0 18px 34px rgba(14,59,35,0.08);">
+        <img src="images/cinnamon-real.jpg" alt="Cinnamon, Avocado Seed & Moringa Powder - picha halisi" style="width:100%; display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" id="productsEyebrow">Bidhaa Zetu</span>
+      <h2 id="productsTitle">Unga na viungo vya asili, tayari kwa matumizi.</h2>
+      <p id="productsDesc">Chagua bidhaa inayokidhi mahitaji yako ya kiafya — kila mtungi umeandaliwa kwa uangalifu na maelekezo wazi ya matumizi.</p>
+    </div>
+    <div class="prod-grid">
+
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/turmeric.jpg" alt="Turmeric, Avocado & Moringa Powder"></div>
+        <div class="prod-body">
+          <span class="prod-weight" id="p1w">250g · Unga</span>
+          <h3>Turmeric, Avocado &amp; Moringa Powder</h3>
+          <p id="p1d">Mchanganyiko wa manjano, mbegu za parachichi na majani ya moringa — kwa nguvu na kinga ya mwili.</p>
+          <a class="prod-cta" href="https://wa.me/255782479748?text=Habari%2C%20nataka%20kuagiza%20Turmeric%2C%20Avocado%20%26%20Moringa%20Powder" target="_blank" rel="noopener"><span id="p1c">Agiza Sasa</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/moringa.jpg" alt="Moringa Leaves Powder"></div>
+        <div class="prod-body">
+          <span class="prod-weight" id="p2w">200g · Unga</span>
+          <h3>Moringa Leaves Powder</h3>
+          <p id="p2d">Unga wa majani ya moringa uliokamilika — chanzo bora cha virutubisho vya asili kwa mwili.</p>
+          <a class="prod-cta" href="https://wa.me/255782479748?text=Habari%2C%20nataka%20kuagiza%20Moringa%20Leaves%20Powder" target="_blank" rel="noopener"><span id="p2c">Agiza Sasa</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/avocado-seed-powder.jpg" alt="Avocado Seed Powder"></div>
+        <div class="prod-body">
+          <span class="prod-weight" id="p3w">350g · Unga</span>
+          <h3>Avocado Seed Powder</h3>
+          <p id="p3d">Tumia unga wa parachichi kwa afya bora — vijiko vikubwa 1x3 kwa siku, kama ilivyoelekezwa.</p>
+          <a class="prod-cta" href="https://wa.me/255782479748?text=Habari%2C%20nataka%20kuagiza%20Avocado%20Seed%20Powder" target="_blank" rel="noopener"><span id="p3c">Agiza Sasa</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/cinnamon-avocado-moringa.jpg" alt="Cinnamon, Avocado Seed & Moringa Powder"></div>
+        <div class="prod-body">
+          <span class="prod-weight" id="p4w">Unga wa Viungo</span>
+          <h3>Cinnamon, Avocado Seed &amp; Moringa Powder</h3>
+          <p id="p4d">Mchanganyiko wa mdalasini, mbegu za parachichi na moringa kwa ladha na afya bora.</p>
+          <a class="prod-cta" href="https://wa.me/255782479748?text=Habari%2C%20nataka%20kuagiza%20Cinnamon%2C%20Avocado%20Seed%20%26%20Moringa%20Powder" target="_blank" rel="noopener"><span id="p4c">Agiza Sasa</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/avocado-moringa-combo.jpg" alt="Avocado Seed Powder & Moringa Leaves Powder"></div>
+        <div class="prod-body">
+          <span class="prod-weight" id="p5w">350g · Unga</span>
+          <h3>Avocado Seed Powder &amp; Moringa Leaves Powder</h3>
+          <p id="p5d">Mchanganyiko wa mbegu za parachichi na majani ya moringa kwa afya na nguvu ya mwili.</p>
+          <a class="prod-cta" href="https://wa.me/255782479748?text=Habari%2C%20nataka%20kuagiza%20Avocado%20Seed%20Powder%20%26%20Moringa%20Leaves%20Powder" target="_blank" rel="noopener"><span id="p5c">Agiza Sasa</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="prod-card" style="display:flex; align-items:center; justify-content:center; text-align:center; background:var(--forest);">
+        <div class="prod-body">
+          <span class="prod-weight" style="color:var(--gold-light);" id="p6w">Bidhaa Mpya</span>
+          <h3 style="color:var(--white);" id="p6t">Zinakuja Hivi Karibuni</h3>
+          <p style="color:rgba(247,243,232,0.72);" id="p6d">Tunaongeza bidhaa mpya za asili. Fuatilia ukurasa wetu wa WhatsApp kwa taarifa.</p>
+          <a class="prod-cta" style="color:var(--white); border-top-color:rgba(255,255,255,0.2);" href="https://wa.me/255782479748" target="_blank" rel="noopener"><span id="p6c">Wasiliana Nasi</span> <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Benefits (dark band) -->
+<section class="band-dark" id="benefits">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" id="benefitsEyebrow">Faida za Bidhaa Zetu</span>
+      <h2 id="benefitsTitle">Mwili wako unastahili kilicho bora.</h2>
+      <p id="benefitsDesc">Bidhaa zetu zimeandaliwa kukuletea manufaa haya ya kiafya kwa matumizi ya kila siku.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-item">
+        <div class="ic">🌿</div>
+        <h4 id="b1t">Asili Kabisa</h4>
+        <p id="b1d">Bila kemikali wala vihifadhi bandia.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="ic">💚</div>
+        <h4 id="b2t">Afya Bora</h4>
+        <p id="b2d">Kinga imara na ustawi wa mwili.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="ic">🥗</div>
+        <h4 id="b3t">Virutubisho</h4>
+        <p id="b3d">Chanzo cha madini na vitamini muhimu.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="ic">⚡</div>
+        <h4 id="b4t">Nguvu &amp; Nishati</h4>
+        <p id="b4d">Kukuwezesha kuendelea na siku yako kwa ukamilifu.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="ic">✨</div>
+        <h4 id="b5t">Maisha Bora</h4>
+        <p id="b5d">Tabia njema za kiafya kwa muda mrefu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section>
+  <div class="container">
+    <div class="quote-strip">
+      <span class="mark">"</span>
+      <p id="quoteText">Tangu nianze kutumia bidhaa za Quick Results, nimeona mabadiliko makubwa katika hali yangu ya afya na nguvu za mwili.</p>
+      <div class="who" id="quoteWho">— Mteja, Dar es Salaam</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="padding-top:0;">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <span class="eyebrow" style="color:var(--gold-light);" id="contactEyebrow">Wasiliana Nasi</span>
+        <h2 style="margin-top:12px;" id="contactTitle">Tuko tayari kukuhudumia.</h2>
+        <p id="contactDesc">Piga simu, tuma WhatsApp au jaza fomu — tutakujibu haraka kuhusu bidhaa na uagizaji.</p>
+
+        <div class="c-row">
+          <div class="ic">📞</div>
+          <div>
+            <div class="k" id="labelSimu">Simu</div>
+            <a class="v" href="tel:+255782479748">0782 479 748</a>
+          </div>
+        </div>
+        <div class="c-row">
+          <div class="ic">📞</div>
+          <div>
+            <div class="k" id="labelSimu2">Simu ya Pili</div>
+            <a class="v" href="tel:+255792831958">0792 831 958</a>
+          </div>
+        </div>
+        <div class="c-row">
+          <div class="ic">💬</div>
+          <div>
+            <div class="k">WhatsApp</div>
+            <a class="v" href="https://wa.me/255782479748" target="_blank" rel="noopener" id="waLinkText">Tuma Ujumbe Sasa</a>
+          </div>
+        </div>
+        <div class="c-row">
+          <div class="ic">📍</div>
+          <div>
+            <div class="k" id="labelEneo">Eneo</div>
+            <div class="v">Dar es Salaam, Tanzania</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 id="formTitle">Tuma Ujumbe</h3>
+        <form onsubmit="event.preventDefault(); window.open('https://wa.me/255782479748?text=' + encodeURIComponent('Jina: ' + this.jina.value + ' / Ujumbe: ' + this.ujumbe.value), '_blank');">
+          <div class="field">
+            <label for="jina" id="labelJina">Jina Lako</label>
+            <input type="text" id="jina" name="jina" required placeholder="Andika jina lako">
+          </div>
+          <div class="field">
+            <label for="simu" id="labelSimuForm">Namba ya Simu</label>
+            <input type="tel" id="simu" name="simu" required placeholder="07xx xxx xxx">
+          </div>
+          <div class="field">
+            <label for="ujumbe" id="labelUjumbe">Ujumbe</label>
+            <textarea id="ujumbe" name="ujumbe" required placeholder="Andika mahitaji yako ya bidhaa..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">Tuma kupitia WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="fbrand">Quick Results Products</div>
+    <p id="footerTagline">Asili. Ubora. Matokeo. — Dar es Salaam, Tanzania</p>
+    <p style="margin-top:10px; opacity:0.7;" id="footerRights">© 2026 Quick Results Products Company Ltd. Haki zote zimehifadhiwa.</p>
+  </div>
+</footer>
+
+<!-- Floating buttons -->
+<button class="faq-float" id="faqToggleBtn" onclick="toggleFaq()" aria-label="Uliza Swali">❓</button>
+<a class="wa-float" href="https://wa.me/255782479748" target="_blank" rel="noopener" aria-label="Wasiliana WhatsApp">💬</a>
+
+<!-- FAQ chat panel -->
+<div class="faq-panel" id="faqPanel">
+  <div class="faq-head">
+    <div>
+      <div class="t" id="faqPanelTitle">Uliza Swali</div>
+      <div class="s" id="faqPanelSubtitle">Tutakusaidia kwa haraka</div>
+    </div>
+    <button class="faq-close" onclick="toggleFaq()" aria-label="Funga">✕</button>
+  </div>
+  <div class="faq-body" id="faqBody"></div>
+  <div class="faq-chips" id="faqChips"></div>
+  <div class="faq-input-row">
+    <input type="text" id="faqInput" placeholder="Andika swali lako..." onkeydown="if(event.key==='Enter'){sendFaq();}">
+    <button class="faq-send" onclick="sendFaq()" aria-label="Tuma">➤</button>
+  </div>
+</div>
+
+<script>
+  var currentLang = 'sw';
+
+  var T = {
+    sw: {
+      navAbout:"Kuhusu Sisi", navProducts:"Bidhaa", navBenefits:"Faida", navContact:"Wasiliana",
+      navCtaText:"Agiza WhatsApp",
+      heroTag:"🌿 ASILI • UBORA • MATOKEO",
+      heroTitle:'Bidhaa za asili kwa <em>afya bora</em> ya kila siku.',
+      heroLead:"Quick Results Products ni chapa ya Kitanzania inayotengeneza unga wa asili, viungo na virutubisho kutoka kwenye mimea safi — kwa afya na maisha bora.",
+      btnPrimary:"Angalia Bidhaa →", btnOutline:"Agiza kupitia WhatsApp",
+      trust1:"Malighafi Asili", trust2:"Bidhaa za Tanzania", trust3:"Aina za Bidhaa",
+      whyEyebrow:"Kwa Nini Utuchague", whyTitle:"Ubora unaoonekana, matokeo unayoyahisi.",
+      whyDesc:"Kila bidhaa inatengenezwa kwa uangalifu, kuanzia uchaguzi wa malighafi hadi ufungashaji, ili kuhakikisha unapata thamani halisi ya fedha yako.",
+      why1t:"100% Asili", why1d:"Hakuna kemikali za ziada — unga na viungo halisi kutoka kwenye mimea.",
+      why2t:"Ubora wa Hali ya Juu", why2d:"Bidhaa zinachujwa na kufungashwa kwa viwango vya usafi na ubora.",
+      why3t:"Kwa Fahari, Tanzania", why3d:"Tunatengeneza na kuchakata bidhaa zetu hapa hapa Tanzania.",
+      why4t:"Ufungashaji Bora", why4d:"Chupa imara zenye lebo wazi na taarifa kamili za matumizi.",
+      why5t:"Uagizaji Rahisi", why5d:"Tuma ujumbe WhatsApp na bidhaa yako itafika popote ulipo.",
+      aboutEyebrow:"Hadithi Yetu", aboutTitle:"Tunaunganisha asili na mahitaji ya afya ya leo.",
+      aboutP1:"Quick Results Products ni chapa ya Kitanzania inayolenga kuwapatia wateja bidhaa bora za asili — unga wa mbegu za parachichi, majani ya moringa, mdalasini, na mchanganyiko wa manjano (turmeric) na moringa.",
+      aboutP2:"Kila bidhaa imeandaliwa kwa lengo moja: kukuletea matokeo ya haraka na ya kudumu kiafya, huku tukienzi malighafi za asili tuliyonayo hapa nchini.",
+      aboutSign:"— Timu ya Quick Results Products",
+      realEyebrow:"Picha Halisi", realTitle:"Bidhaa zetu, moja kwa moja kutoka ofisini kwetu.",
+      realDesc:"Hizi ni picha halisi za bidhaa zetu — si mfano tu, ndivyo zinavyofika mikononi mwa wateja.",
+      productsEyebrow:"Bidhaa Zetu", productsTitle:"Unga na viungo vya asili, tayari kwa matumizi.",
+      productsDesc:"Chagua bidhaa inayokidhi mahitaji yako ya kiafya — kila mtungi umeandaliwa kwa uangalifu na maelekezo wazi ya matumizi.",
+      p1w:"250g · Unga", p1d:"Mchanganyiko wa manjano, mbegu za parachichi na majani ya moringa — kwa nguvu na kinga ya mwili.", p1c:"Agiza Sasa",
+      p2w:"200g · Unga", p2d:"Unga wa majani ya moringa uliokamilika — chanzo bora cha virutubisho vya asili kwa mwili.", p2c:"Agiza Sasa",
+      p3w:"350g · Unga", p3d:"Tumia unga wa parachichi kwa afya bora — vijiko vikubwa 1x3 kwa siku, kama ilivyoelekezwa.", p3c:"Agiza Sasa",
+      p4w:"Unga wa Viungo", p4d:"Mchanganyiko wa mdalasini, mbegu za parachichi na moringa kwa ladha na afya bora.", p4c:"Agiza Sasa",
+      p5w:"350g · Unga", p5d:"Mchanganyiko wa mbegu za parachichi na majani ya moringa kwa afya na nguvu ya mwili.", p5c:"Agiza Sasa",
+      p6w:"Bidhaa Mpya", p6t:"Zinakuja Hivi Karibuni", p6d:"Tunaongeza bidhaa mpya za asili. Fuatilia ukurasa wetu wa WhatsApp kwa taarifa.", p6c:"Wasiliana Nasi",
+      benefitsEyebrow:"Faida za Bidhaa Zetu", benefitsTitle:"Mwili wako unastahili kilicho bora.",
+      benefitsDesc:"Bidhaa zetu zimeandaliwa kukuletea manufaa haya ya kiafya kwa matumizi ya kila siku.",
+      b1t:"Asili Kabisa", b1d:"Bila kemikali wala vihifadhi bandia.",
+      b2t:"Afya Bora", b2d:"Kinga imara na ustawi wa mwili.",
+      b3t:"Virutubisho", b3d:"Chanzo cha madini na vitamini muhimu.",
+      b4t:"Nguvu &amp; Nishati", b4d:"Kukuwezesha kuendelea na siku yako kwa ukamilifu.",
+      b5t:"Maisha Bora", b5d:"Tabia njema za kiafya kwa muda mrefu.",
+      quoteText:"Tangu nianze kutumia bidhaa za Quick Results, nimeona mabadiliko makubwa katika hali yangu ya afya na nguvu za mwili.",
+      quoteWho:"— Mteja, Dar es Salaam",
+      contactEyebrow:"Wasiliana Nasi", contactTitle:"Tuko tayari kukuhudumia.",
+      contactDesc:"Piga simu, tuma WhatsApp au jaza fomu — tutakujibu haraka kuhusu bidhaa na uagizaji.",
+      labelSimu:"Simu", labelSimu2:"Simu ya Pili", waLinkText:"Tuma Ujumbe Sasa", labelEneo:"Eneo",
+      formTitle:"Tuma Ujumbe", labelJina:"Jina Lako", labelSimuForm:"Namba ya Simu", labelUjumbe:"Ujumbe",
+      submitBtn:"Tuma kupitia WhatsApp",
+      footerTagline:"Asili. Ubora. Matokeo. — Dar es Salaam, Tanzania",
+      footerRights:"© 2026 Quick Results Products Company Ltd. Haki zote zimehifadhiwa.",
+      faqPanelTitle:"Uliza Swali", faqPanelSubtitle:"Tutakusaidia kwa haraka",
+      faqInputPh:"Andika swali lako...",
+      faqGreeting:"Habari! 👋 Niulize chochote kuhusu bidhaa zetu, uagizaji, bei au usafirishaji.",
+      faqFallback:"Samahani, sijaelewa vizuri swali lako. Tafadhali wasiliana nasi moja kwa moja kupitia WhatsApp kwa msaada zaidi 👉",
+      faqAskBtnAria:"Uliza Swali"
+    },
+    en: {
+      navAbout:"About Us", navProducts:"Products", navBenefits:"Benefits", navContact:"Contact",
+      navCtaText:"Order on WhatsApp",
+      heroTag:"🌿 NATURE • QUALITY • RESULTS",
+      heroTitle:'Natural products for <em>better health</em>, every day.',
+      heroLead:"Quick Results Products is a Tanzanian brand making natural powders, herbs and supplements from pure plants — for better health and a better life.",
+      btnPrimary:"View Products →", btnOutline:"Order via WhatsApp",
+      trust1:"Natural Ingredients", trust2:"Tanzanian Made", trust3:"Product Varieties",
+      whyEyebrow:"Why Choose Us", whyTitle:"Quality you can see, results you can feel.",
+      whyDesc:"Every product is carefully made, from sourcing the raw ingredients to packaging, so you get real value for your money.",
+      why1t:"100% Natural", why1d:"No added chemicals — real powders and ingredients straight from the plant.",
+      why2t:"Premium Quality", why2d:"Products are sieved and packaged to strict cleanliness and quality standards.",
+      why3t:"Proudly Tanzanian", why3d:"We make and process our products right here in Tanzania.",
+      why4t:"Quality Packaging", why4d:"Sturdy jars with clear labels and full usage instructions.",
+      why5t:"Easy Ordering", why5d:"Send a WhatsApp message and your order will reach you wherever you are.",
+      aboutEyebrow:"Our Story", aboutTitle:"Bringing nature together with today's health needs.",
+      aboutP1:"Quick Results Products is a Tanzanian brand focused on giving customers quality natural products — avocado seed powder, moringa leaf powder, cinnamon, and a turmeric-avocado-moringa blend.",
+      aboutP2:"Every product is made with one goal: to bring you fast and lasting health results, while honouring the natural ingredients we have here at home.",
+      aboutSign:"— The Quick Results Products Team",
+      realEyebrow:"Real Photos", realTitle:"Our products, straight from our office.",
+      realDesc:"These are real photos of our products — not just mockups, this is exactly what reaches our customers.",
+      productsEyebrow:"Our Products", productsTitle:"Natural powders and blends, ready to use.",
+      productsDesc:"Choose the product that fits your health needs — every jar is carefully prepared with clear usage instructions.",
+      p1w:"250g · Powder", p1d:"A blend of turmeric, avocado seed and moringa leaves — for strength and immune support.", p1c:"Order Now",
+      p2w:"200g · Powder", p2d:"Pure moringa leaf powder — an excellent source of natural nutrients for the body.", p2c:"Order Now",
+      p3w:"350g · Powder", p3d:"Use avocado seed powder for better health — one tablespoon, 3 times a day, as directed.", p3c:"Order Now",
+      p4w:"Spice Powder", p4d:"A blend of cinnamon, avocado seed and moringa for flavour and better health.", p4c:"Order Now",
+      p5w:"350g · Powder", p5d:"A blend of avocado seed and moringa leaf powder for health and body strength.", p5c:"Order Now",
+      p6w:"New Arrivals", p6t:"Coming Soon", p6d:"We're adding new natural products. Follow our WhatsApp page for updates.", p6c:"Contact Us",
+      benefitsEyebrow:"Benefits of Our Products", benefitsTitle:"Your body deserves the best.",
+      benefitsDesc:"Our products are made to bring you these health benefits with everyday use.",
+      b1t:"Fully Natural", b1d:"No chemicals or artificial preservatives.",
+      b2t:"Better Health", b2d:"Stronger immunity and overall wellness.",
+      b3t:"Nutrition", b3d:"A source of essential minerals and vitamins.",
+      b4t:"Energy &amp; Strength", b4d:"Helping you power through your whole day.",
+      b5t:"Healthy Lifestyle", b5d:"Good health habits that last.",
+      quoteText:"Since I started using Quick Results products, I've seen a real change in my health and energy levels.",
+      quoteWho:"— Customer, Dar es Salaam",
+      contactEyebrow:"Get in Touch", contactTitle:"We're ready to help you.",
+      contactDesc:"Call, message us on WhatsApp, or fill in the form — we'll respond quickly about products and ordering.",
+      labelSimu:"Phone", labelSimu2:"Second Phone", waLinkText:"Send a Message Now", labelEneo:"Location",
+      formTitle:"Send a Message", labelJina:"Your Name", labelSimuForm:"Phone Number", labelUjumbe:"Message",
+      submitBtn:"Send via WhatsApp",
+      footerTagline:"Nature. Quality. Results. — Dar es Salaam, Tanzania",
+      footerRights:"© 2026 Quick Results Products Company Ltd. All rights reserved.",
+      faqPanelTitle:"Ask a Question", faqPanelSubtitle:"We'll help you right away",
+      faqInputPh:"Type your question...",
+      faqGreeting:"Hi! 👋 Ask me anything about our products, ordering, pricing or delivery.",
+      faqFallback:"Sorry, I didn't quite understand that. Please reach us directly on WhatsApp for more help 👉",
+      faqAskBtnAria:"Ask a Question"
+    }
+  };
+
+  function setLang(lang){
+    currentLang = lang;
+    document.getElementById('htmlRoot').lang = lang;
+    document.getElementById('langSwBtn').classList.toggle('active', lang === 'sw');
+    document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+    var dict = T[lang];
+    Object.keys(dict).forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      if(id === 'heroTitle'){ el.innerHTML = dict[id]; }
+      else { el.innerHTML = dict[id]; }
+    });
+    // Rebuild the FAQ intro + chips in the new language
+    initFaq();
+  }
+
+  /* ---------- FAQ chatbot ---------- */
+  var faqData = [
+    {
+      kw: { sw:["tengeneza","malighafi","viungo vinatoka","namna gani zinatengenezwa"], en:["made","ingredients from","how are they made"] },
+      a: { sw:"Bidhaa zetu zinatengenezwa kutoka mimea asilia kama parachichi, moringa na mdalasini, zinakaushwa na kusagwa kwa uangalifu bila kuongeza kemikali.",
+           en:"Our products are made from natural plants like avocado seeds, moringa and cinnamon, carefully dried and ground with no added chemicals." },
+      chip:{sw:"Bidhaa zinatengenezwaje?", en:"How are they made?"}
+    },
+    {
+      kw: { sw:["agiza","nunua","namna ya kupata","order"], en:["order","buy","purchase","get"] },
+      a: { sw:"Unaweza kuagiza kwa kubonyeza kitufe cha WhatsApp hapa chini au kupiga simu 0782 479 748 / 0792 831 958.",
+           en:"You can order by tapping the WhatsApp button below or calling 0782 479 748 / 0792 831 958." },
+      chip:{sw:"Ninawezaje kuagiza?", en:"How do I order?"}
+    },
+    {
+      kw: { sw:["safirisha","peleka","nje ya dar","usafirishaji"], en:["deliver","delivery","shipping","outside dar"] },
+      a: { sw:"Ndiyo, tunasafirisha bidhaa Dar es Salaam na maeneo mengine ya Tanzania. Tuma ujumbe WhatsApp kwa maelezo ya usafirishaji eneo lako.",
+           en:"Yes, we deliver within Dar es Salaam and to other regions of Tanzania. Message us on WhatsApp for delivery details to your area." },
+      chip:{sw:"Mnasafirisha nje ya Dar?", en:"Do you deliver outside Dar?"}
+    },
+    {
+      kw: { sw:["bei","gharama"], en:["price","cost","how much"] },
+      a: { sw:"Bei hutofautiana kutegemea bidhaa na ujazo. Tuma ujumbe WhatsApp na tutakutumia bei kamili ya bidhaa unayotaka.",
+           en:"Prices vary depending on the product and size. Message us on WhatsApp and we'll send you the exact price for what you need." },
+      chip:{sw:"Bei ni kiasi gani?", en:"What are the prices?"}
+    },
+    {
+      kw: { sw:["jumla","wholesale","rejareja"], en:["wholesale","bulk"] },
+      a: { sw:"Ndiyo, tunauza jumla kwa wauzaji na maduka. Wasiliana nasi WhatsApp kujadili bei na kiasi.",
+           en:"Yes, we offer wholesale for retailers and shops. Contact us on WhatsApp to discuss pricing and quantities." },
+      chip:{sw:"Mnauza jumla?", en:"Do you sell wholesale?"}
+    },
+    {
+      kw: { sw:["matumizi","tumia","kiasi gani","vijiko"], en:["use","usage","dosage","how to use"] },
+      a: { sw:"Kwa kawaida, tumia kijiko kikubwa 1 mara 3 kwa siku, au kama ilivyoelekezwa kwenye lebo ya bidhaa husika.",
+           en:"Typically, use one tablespoon 3 times a day, or as directed on the specific product's label." },
+      chip:{sw:"Natumia vipi bidhaa?", en:"How do I use the product?"}
+    }
+  ];
+
+  function faqAppend(text, who){
+    var body = document.getElementById('faqBody');
+    var div = document.createElement('div');
+    div.className = 'msg ' + who;
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function initFaq(){
+    var body = document.getElementById('faqBody');
+    body.innerHTML = '';
+    faqAppend(T[currentLang].faqGreeting, 'bot');
+    var chips = document.getElementById('faqChips');
+    chips.innerHTML = '';
+    faqData.forEach(function(item){
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.type = 'button';
+      b.textContent = item.chip[currentLang];
+      b.onclick = function(){ handleFaqQuery(item.chip[currentLang]); };
+      chips.appendChild(b);
+    });
+    document.getElementById('faqInput').placeholder = T[currentLang].faqInputPh;
+  }
+
+  function handleFaqQuery(text){
+    if(!text || !text.trim()) return;
+    faqAppend(text, 'user');
+    var lower = text.toLowerCase();
+    var match = null;
+    for(var i=0;i<faqData.length;i++){
+      var kws = faqData[i].kw[currentLang];
+      for(var j=0;j<kws.length;j++){
+        if(lower.indexOf(kws[j]) !== -1){ match = faqData[i]; break; }
+      }
+      if(match) break;
+    }
+    setTimeout(function(){
+      if(match){
+        faqAppend(match.a[currentLang], 'bot');
+      } else {
+        faqAppend(T[currentLang].faqFallback + ' <a href="https://wa.me/255782479748" target="_blank" style="color:var(--gold); font-weight:700;">WhatsApp</a>', 'bot');
+      }
+    }, 350);
+  }
+
+  function sendFaq(){
+    var input = document.getElementById('faqInput');
+    var val = input.value;
+    input.value = '';
+    handleFaqQuery(val);
+  }
+
+  function toggleFaq(){
+    var panel = document.getElementById('faqPanel');
+    panel.classList.toggle('open');
+    if(panel.classList.contains('open')){
+      document.getElementById('faqInput').focus();
+    }
+  }
+
+  // init
+  initFaq();
+</script>
+
+</body>
+</html>
